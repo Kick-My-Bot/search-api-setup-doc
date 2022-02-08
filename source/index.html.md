@@ -36,7 +36,6 @@ const tablesNamesES = {
 ```
 
 
-<hr>
 
 ## Fields names
 ```javascript
@@ -46,7 +45,6 @@ const esParameters = {
 }
 ```
 
-<hr>
 
 
 ## Basic structure
@@ -183,7 +181,6 @@ As numeric field, we can send min / max objects:
 ```
 
 
-<hr>
 
 
 ## Basic string field
@@ -219,7 +216,6 @@ And get all the data where `status` is equal to `Available`.
 
 The `options` object will specify **exact match** for data result (needed with string queries).
 
-<hr>
 
 
 ## Basic array of string
@@ -254,7 +250,6 @@ We can send a query like:
 ```
 And get all data where the status is `Active` **OR** `Available`.
 
-<hr>
 
 
 ## Basic array of string + default value
@@ -284,7 +279,6 @@ const esIndexes = {
 
 We can send an empty query, and get all data where the status is `Available`.
 
-<hr>
 
 
 ## Array of string + default values
@@ -314,7 +308,6 @@ const esIndexes = {
 
 We can send an empty query, and get all data where the status is `Available` **OR** `Active`.
 
-<hr>
 
 
 ## Array of string + advanced default values
@@ -349,7 +342,6 @@ const esIndexes = {
 
 We can send an empty query, and get all data where the status is **NOT** `Vendu` **NOR** `Compromis` **NOR** `Suspendu`.
 
-<hr>
 
 
 ## Advanced example
@@ -554,7 +546,6 @@ sort: {
 }
 ```
 
-<hr>
 
 ## Script parameter
 
@@ -626,7 +617,6 @@ const esIndexes = {
 }
 ```
 
-<hr>
 
 
 ## Gauss parameter
@@ -655,7 +645,6 @@ For example:
 - it is located at `7km` from the requested point
 - with the config the final score will be `70`
 
-<hr>
 
 
 ## Travel time
@@ -852,7 +841,6 @@ The string will be geolocalized, and the coordinates will be used as starting po
 }
 ```
 
-<hr>
 
 
 ## Starting coordinates
@@ -906,7 +894,6 @@ We can send a query like:
 }
 ```
 
-<hr>
 
 ## Starting city
 
@@ -937,7 +924,6 @@ We can send a query like:
 }
 ```
 
-<hr>
 
 
 ## Bound box
@@ -989,7 +975,6 @@ We can send a query like:
 }
 ```
 
-<hr>
 
 
 ## Polygons
@@ -1017,7 +1002,7 @@ The structure is as following:
 ]
 ```
 
-The correct settings are simple, but must includes `objetc` and `array` as correct type.
+The correct settings are simple, but must includes `object` and `array` as correct type.
 
 ```javascript
 const esIndexes = {
@@ -1044,6 +1029,14 @@ const esIndexes = {
 
 # Associations
 
+It is possible to add assocaitions, in order to query multiple values from one query.
+
+For example, the postal code of Paris 16 can be either `75016` or `75116`.
+
+If a query contains `75016`, it will also search 75116 as postal code with a OR query.
+
+The config is as following:
+
 ```javascript
 const associations = {
 	zip_code: [
@@ -1052,7 +1045,39 @@ const associations = {
 };
 ```
 
+We can send a query like:
+
+```javascript
+{
+	zip_code: "75016"
+}
+```
+
+It will be the same as if we send a query like:
+
+```javascript
+{
+	zip_code: [ "75016", "75116" ]
+}
+```
+
 # Synonyms
+
+It is possible to add synonyms in order to replace some requested values.
+
+The structure is as following:
+
+```javascript
+const synonyms = {
+	FIELD_NAME: {
+		WORD: [
+			...SYNONYMS
+		]
+	}
+}
+```
+
+For example, we can add synonyms for estate types:
 
 ```javascript
 const synonyms = {
@@ -1065,20 +1090,30 @@ const synonyms = {
 			"Appartement",
 			"Loft",
 			"Marina"
-		],
-		Commerce: [
-			"Fond de commerce",
-			"Local Commercial",
-			"local commercial"
-		],
-		Bureau: [
-			"Bureaux"
 		]
 	}
 }
 ```
 
+We can send a query like:
+
+```javascript
+{
+	type_bien: "Maison"
+}
+```
+
+It will be the same as if we send a query like:
+
+```javascript
+{
+	type_bien: [ "Maison", "Villa" ]
+}
+```
+
 # Settings
+
+The `esSettings` function purpose is to retrieve the ES settings for indexes, as following:
 
 ```javascript
 {
@@ -1101,8 +1136,7 @@ const synonyms = {
 				french_stemmer: {
 					type: "stemmer",
 					language: "light_french"
-				},
-				...s
+				}
 			},
 			tokenizer: {
 				location_tokenizer: {
@@ -1113,7 +1147,13 @@ const synonyms = {
 			analyzer: {
 				french: {
 					tokenizer: "icu_tokenizer",
-					filter: [ ...filters ]
+					filter: [
+						"french_stop",
+						"french_elision",
+						"lowercase",
+						"icu_folding",
+						"french_stemmer"
+					];
 				},
 				location_analyzer: {
 					type: "custom",
@@ -1126,6 +1166,85 @@ const synonyms = {
 }
 ```
 
+It is used to initialiaze `filters`, `tokenizer` and `analyzer`.
+
+It can have some `synonyms` in parameter (from the Backoffice or from a specific file).
+
+## Filters
+
+Filters are set as following:
+
+```javascript
+{
+	french_elision: {
+		type: "elision",
+		articles_case: true,
+		articles: [
+			"l", "m", "t", "qu", "n", "s",
+			"j", "d", "c", "jusqu", "quoiqu",
+			"lorsqu", "puisqu"
+		]
+	},
+	french_stop: {
+		type: "stop",
+		stopwords: "_french_"
+	},
+	french_stemmer: {
+		type: "stemmer",
+		language: "light_french"
+	}
+}
+```
+
+- `french_elision` will be used to remove some words
+- `french_stop` will be used for french stop words = words that will not be taken into account
+- `french_stemmer` will be used for word stemming = get words root
+
+These filters will be used against all the `data that will be indexed into ES`, and against the `values passed in the query`.
+
+
+## Analyzer
+
+The analyzers will help to process the indexed data and the requested values.
+
+It uses all the filters previously defined.
+
+```javascript
+{
+	french: {
+		tokenizer: "icu_tokenizer",
+		filter: [
+			"french_stop",
+			"french_elision",
+			"lowercase",
+			"icu_folding",
+			"french_stemmer"
+		];
+	},
+	location_analyzer: {
+		type: "custom",
+		tokenizer: "location_tokenizer"
+	}
+}
+```
+
+## Synonyms
+
+Synonyms from the Backoffice can be passed from the parameters.
+
+```javascript
+{
+	synonym_filter: {
+		type: "synonym_graph",
+		ignore_case: "true",
+		lenient: true,
+		synonyms
+	}
+}
+```
+
+A synonym filter needs to be added and used in the config.
+
 
 # Schema
 
@@ -1133,14 +1252,12 @@ const synonyms = {
 
 <img src="./images/api-archi.jpeg" alt="api-gateway" />
 
-<hr>
 
 
 ## API FW architecture
 
 <img src="./images/api-fw-archi.jpeg" alt="api-gateway" />
 
-<hr>
 
 
 # API Gateway
@@ -1149,13 +1266,11 @@ const synonyms = {
 
 <img src="./images/api-gateway-archi.jpeg" alt="api-gateway" />
 
-<hr>
 
 ## Method Request
 
 The `API Key REquired` must be set to `true`
 
-<hr>
 
 
 ## Integration Request
@@ -1181,7 +1296,6 @@ The mapping templates should be as follow:
 }
 ```
 
-<hr>
 
 
 ## Method Responses
@@ -1193,7 +1307,6 @@ Configure the correct `HTTP Status`:
 - 200
 - 500
 
-<hr>
 
 
 ## Integration Responses
@@ -1205,9 +1318,10 @@ Configure the correct `HTTP Status`:
 	- Mapping templates:
 		- content type: application/json
 		- template:
-			```json
-			$input.path("$.body")
-			```
+
+```json
+$input.path("$.body")
+```
 
 - Error
 	- Lambda Error Regex: Error.*
@@ -1216,6 +1330,7 @@ Configure the correct `HTTP Status`:
 	- Mapping templates:
 		- content type: application/json
 		- template:
-			```json
-			{ "error" : true, "message": $input.json("$.errorMessage") }
-			```
+
+```json
+{ "error" : true, "message": $input.json("$.errorMessage") }
+```
