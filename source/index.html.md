@@ -103,6 +103,7 @@ If `array` is selected, it will check if all the array items fit the other types
 
 Instead of using directly a name like `"location"`, please use `[esParameters.location]` as key for the config, in order to handle translations and renaming.
 
+
 # Terms structure
 
 The `terms` config is used for queries agains data fields.
