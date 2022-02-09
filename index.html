@@ -268,7 +268,13 @@
           </li>
           <li>
             <a href="#from-and-size" class="toc-h1 toc-link" data-title="From and size">From and size</a>
+          </li>
+          <li>
+            <a href="#sort" class="toc-h1 toc-link" data-title="Sort">Sort</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#basic-structure-2" class="toc-h2 toc-link" data-title="Basic structure">Basic structure</a>
+                  </li>
                   <li>
                     <a href="#script-parameter" class="toc-h2 toc-link" data-title="Script parameter">Script parameter</a>
                   </li>
@@ -278,7 +284,7 @@
             <a href="#location" class="toc-h1 toc-link" data-title="Location">Location</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#basic-structure-2" class="toc-h2 toc-link" data-title="Basic structure">Basic structure</a>
+                    <a href="#basic-structure-3" class="toc-h2 toc-link" data-title="Basic structure">Basic structure</a>
                   </li>
                   <li>
                     <a href="#gauss-parameter" class="toc-h2 toc-link" data-title="Gauss parameter">Gauss parameter</a>
@@ -748,44 +754,37 @@ And get all data where the status is <code>Active</code> <strong>OR</strong> <co
 <pre class="highlight javascript tab-javascript"><code><span class="nx">from</span><span class="p">:</span> <span class="p">{</span>
     <span class="nl">correctTypes</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"string"</span><span class="p">,</span> <span class="s2">"number"</span> <span class="p">]</span>
 <span class="p">}</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">size</span><span class="p">:</span> <span class="p">{</span>
+
+<span class="nl">size</span><span class="p">:</span> <span class="p">{</span>
     <span class="nl">correctTypes</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"string"</span><span class="p">,</span> <span class="s2">"number"</span> <span class="p">]</span>
 <span class="p">}</span>
 </code></pre>
-<p>We can then send queries like:
-```javascript
-{
-    from: 100,
-    size: 100
-}</p>
-<pre class="highlight plaintext"><code>
+<p>We can then send queries like:</p>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="nl">from</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="nx">size</span><span class="p">:</span> <span class="mi">100</span>
+<span class="p">}</span>
+</code></pre><h1 id='sort'>Sort</h1><h2 id='basic-structure-2'>Basic structure</h2>
+<p>The <code>sort</code> parameter is used for sorting results.</p>
 
-# Sort
-
-## Basic structure
-
-The `sort` parameter is used for sorting results.
-
-The basic structure is:
-
-```javascript
-const esIndexes = {
-    [tablesNameES.properties]: {
-        [esParameters.sort]: {
-            correctTypes: [ "object", "array" ],
-            correctParameters: {
-                attribute: {
-                    correctTypes: [ "string" ]
-                },
-                order: {
-                    correctTypes: [ "string" ],
-                    correctValues: [ "asc", "desc" ],
-                    defaultValue: "desc"
-                }
-            }
-        }
-    }
-}
+<p>The basic structure is:</p>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">esIndexes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">[</span><span class="nx">tablesNameES</span><span class="p">.</span><span class="nx">properties</span><span class="p">]:</span> <span class="p">{</span>
+        <span class="p">[</span><span class="nx">esParameters</span><span class="p">.</span><span class="nx">sort</span><span class="p">]:</span> <span class="p">{</span>
+            <span class="na">correctTypes</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"object"</span><span class="p">,</span> <span class="s2">"array"</span> <span class="p">],</span>
+            <span class="na">correctParameters</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">attribute</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="na">correctTypes</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"string"</span> <span class="p">]</span>
+                <span class="p">},</span>
+                <span class="na">order</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="na">correctTypes</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"string"</span> <span class="p">],</span>
+                    <span class="na">correctValues</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"asc"</span><span class="p">,</span> <span class="s2">"desc"</span> <span class="p">],</span>
+                    <span class="na">defaultValue</span><span class="p">:</span> <span class="s2">"desc"</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
 <p>We can then send queries like:
 <code>javascript
@@ -820,7 +819,7 @@ sort: {
 <p>This is some <strong>fine art</strong> to get the item result, and multiply it by a factor that depends on the exclusivity value (0 or 1).</p>
 
 <p><em>Some people get hired at Nasa for less than that.</em></p>
-<h1 id='location'>Location</h1><h2 id='basic-structure-2'>Basic structure</h2>
+<h1 id='location'>Location</h1><h2 id='basic-structure-3'>Basic structure</h2>
 <p>The <code>location</code> object contains all the location queries.</p>
 
 <p>The <code>correctParameters</code> for the ocation queries can be one of the following:</p>
