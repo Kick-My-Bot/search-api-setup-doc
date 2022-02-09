@@ -492,21 +492,19 @@ The `size` value if for the number of elements in the results.
 from: {
 	correctTypes: [ "string", "number" ]
 }
-```
 
-```javascript
 size: {
 	correctTypes: [ "string", "number" ]
 }
 ```
 
 We can then send queries like:
+
 ```javascript
 {
 	from: 100,
 	size: 100
 }
-
 ```
 
 
