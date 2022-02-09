@@ -308,6 +308,17 @@
           </li>
           <li>
             <a href="#settings" class="toc-h1 toc-link" data-title="Settings">Settings</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#filters" class="toc-h2 toc-link" data-title="Filters">Filters</a>
+                  </li>
+                  <li>
+                    <a href="#analyzer" class="toc-h2 toc-link" data-title="Analyzer">Analyzer</a>
+                  </li>
+                  <li>
+                    <a href="#synonyms-2" class="toc-h2 toc-link" data-title="Synonyms">Synonyms</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#schema" class="toc-h1 toc-link" data-title="Schema">Schema</a>
@@ -377,15 +388,11 @@
 <pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">tablesNamesES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">properties</span><span class="p">:</span> <span class="s2">"biens"</span>
 <span class="p">}</span>
-</code></pre>
-<p><hr></p>
-<h2 id='fields-names'>Fields names</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">esParameters</span> <span class="o">=</span> <span class="p">{</span>
+</code></pre><h2 id='fields-names'>Fields names</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">esParameters</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">keywords</span><span class="p">:</span> <span class="s2">"mots_cles"</span><span class="p">,</span>
     <span class="na">location</span><span class="p">:</span> <span class="s2">"localisation"</span>
 <span class="p">}</span>
-</code></pre>
-<p><hr></p>
-<h2 id='basic-structure'>Basic structure</h2>
+</code></pre><h2 id='basic-structure'>Basic structure</h2>
 <p>All the config is dedicated to a specific index, and the index name is got from <code>tablesNamesES</code> object:</p>
 <pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">esIndexes</span> <span class="o">=</span> <span class="p">{</span>
     <span class="p">[</span><span class="nx">tablesNameES</span><span class="p">.</span><span class="nx">properties</span><span class="p">]:</span> <span class="p">{</span>
@@ -492,9 +499,7 @@
         <span class="nx">max</span><span class="p">:</span> <span class="mi">200000</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre>
-<p><hr></p>
-<h2 id='basic-string-field'>Basic string field</h2>
+</code></pre><h2 id='basic-string-field'>Basic string field</h2>
 <p>To initialize a string field for exact match:</p>
 <pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">esIndexes</span> <span class="o">=</span> <span class="p">{</span>
     <span class="p">[</span><span class="nx">tablesNameES</span><span class="p">.</span><span class="nx">properties</span><span class="p">]:</span> <span class="p">{</span>
@@ -520,8 +525,6 @@
 <p>And get all the data where <code>status</code> is equal to <code>Available</code>.</p>
 
 <p>The <code>options</code> object will specify <strong>exact match</strong> for data result (needed with string queries).</p>
-
-<p><hr></p>
 <h2 id='basic-array-of-string'>Basic array of string</h2>
 <p>To allow arrays of string, we just need to add &quot;array&quot; in correctTypes.</p>
 
@@ -549,8 +552,6 @@
 }
 </code>
 And get all data where the status is <code>Active</code> <strong>OR</strong> <code>Available</code>.</p>
-
-<p><hr></p>
 <h2 id='basic-array-of-string-default-value'>Basic array of string + default value</h2>
 <p>Default values can be used in order to query specific items:</p>
 <pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">esIndexes</span> <span class="o">=</span> <span class="p">{</span>
@@ -573,8 +574,6 @@ And get all data where the status is <code>Active</code> <strong>OR</strong> <co
 <span class="p">}</span>
 </code></pre>
 <p>We can send an empty query, and get all data where the status is <code>Available</code>.</p>
-
-<p><hr></p>
 <h2 id='array-of-string-default-values'>Array of string + default values</h2>
 <p>Default values can be used in order to query specific items:</p>
 <pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">esIndexes</span> <span class="o">=</span> <span class="p">{</span>
@@ -597,8 +596,6 @@ And get all data where the status is <code>Active</code> <strong>OR</strong> <co
 <span class="p">}</span>
 </code></pre>
 <p>We can send an empty query, and get all data where the status is <code>Available</code> <strong>OR</strong> <code>Active</code>.</p>
-
-<p><hr></p>
 <h2 id='array-of-string-advanced-default-values'>Array of string + advanced default values</h2>
 <p>Default values can be set with options, such as <code>operand</code>, that will update the kind of query:</p>
 <pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">esIndexes</span> <span class="o">=</span> <span class="p">{</span>
@@ -626,8 +623,6 @@ And get all data where the status is <code>Active</code> <strong>OR</strong> <co
 <span class="p">}</span>
 </code></pre>
 <p>We can send an empty query, and get all data where the status is <strong>NOT</strong> <code>Vendu</code> <strong>NOR</strong> <code>Compromis</code> <strong>NOR</strong> <code>Suspendu</code>.</p>
-
-<p><hr></p>
 <h2 id='advanced-example'>Advanced example</h2>
 <p>For nested objects, we can add <code>notIncludedInES</code>.</p>
 
@@ -799,8 +794,6 @@ sort: {
     order: &quot;asc&quot;
 }
 </code></p>
-
-<p><hr></p>
 <h2 id='script-parameter'>Script parameter</h2>
 <p>The <code>script</code> parameter allow the query to contain a painless script, in order to sort results from data values.</p>
 <pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">esIndexes</span> <span class="o">=</span> <span class="p">{</span>
@@ -857,9 +850,7 @@ sort: {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre>
-<p><hr></p>
-<h2 id='gauss-parameter'>Gauss parameter</h2>
+</code></pre><h2 id='gauss-parameter'>Gauss parameter</h2>
 <p>The <code>gauss</code> parameter is used for the locatlisation functon.</p>
 
 <p>The config is as follow:</p>
@@ -882,8 +873,6 @@ sort: {
 <li>it is located at <code>7km</code> from the requested point</li>
 <li>with the config the final score will be <code>70</code></li>
 </ul>
-
-<p><hr></p>
 <h2 id='travel-time'>Travel time</h2>
 <p>The <code>travel time</code> query needs a field name in order to select on which field the query will be run against:</p>
 <pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">esIndexes</span> <span class="o">=</span> <span class="p">{</span>
@@ -1045,9 +1034,7 @@ sort: {
 <pre class="highlight javascript tab-javascript"><code><span class="p">[</span><span class="nx">esParameters</span><span class="p">.</span><span class="nx">startingCity</span><span class="p">]:</span> <span class="p">{</span>
     <span class="nl">correctTypes</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"string"</span><span class="p">,</span> <span class="s2">"array"</span> <span class="p">]</span>
 <span class="p">}</span>
-</code></pre>
-<p><hr></p>
-<h2 id='starting-coordinates'>Starting coordinates</h2>
+</code></pre><h2 id='starting-coordinates'>Starting coordinates</h2>
 <p>The <code>startingCoordinates</code> option is used to get all items from one point.</p>
 
 <p>The more they are close to this point, the sooner they will appear in the results.</p>
@@ -1090,9 +1077,7 @@ sort: {
         <span class="nx">lon</span><span class="p">:</span> <span class="s2">"-0.4072621"</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre>
-<p><hr></p>
-<h2 id='starting-city'>Starting city</h2>
+</code></pre><h2 id='starting-city'>Starting city</h2>
 <p>The same logic as in <code>startingCoordinates</code> is applied with the <code>startingCity</code>.</p>
 
 <p>The more they are close to the geolocalized point from the city name, the sooner they will appear in the results.</p>
@@ -1113,9 +1098,7 @@ sort: {
 <pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
     <span class="nl">starting_city</span><span class="p">:</span> <span class="s2">"Caen"</span>
 <span class="p">}</span>
-</code></pre>
-<p><hr></p>
-<h2 id='bound-box'>Bound box</h2>
+</code></pre><h2 id='bound-box'>Bound box</h2>
 <p>The <code>boundBox</code> option is used for queries with <code>east</code>, <code>west</code>, <code>north</code>, and <code>south</code> values (for examples with maps that send the four values, in order to get results inside that map).</p>
 
 <p>The four points (<code>NE</code>, <code>NW</code>, <code>SE</code>, <code>SW</code>) will be construct with these values.</p>
@@ -1156,9 +1139,7 @@ sort: {
         <span class="s2">"south"</span><span class="p">:</span> <span class="mf">48.40081833276716</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre>
-<p><hr></p>
-<h2 id='polygons'>Polygons</h2>
+</code></pre><h2 id='polygons'>Polygons</h2>
 <p>The <code>points</code> option can be used to get items inside a polygon made with several polygons.</p>
 
 <p>One polygon is a list of points.</p>
@@ -1179,7 +1160,7 @@ sort: {
     <span class="p">]</span>
 <span class="p">]</span>
 </code></pre>
-<p>The correct settings are simple, but must includes <code>objetc</code> and <code>array</code> as correct type.</p>
+<p>The correct settings are simple, but must includes <code>object</code> and <code>array</code> as correct type.</p>
 <pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">esIndexes</span> <span class="o">=</span> <span class="p">{</span>
     <span class="p">[</span><span class="nx">tablesNameES</span><span class="p">.</span><span class="nx">properties</span><span class="p">]:</span> <span class="p">{</span>
         <span class="p">[</span><span class="nx">esParameters</span><span class="p">.</span><span class="nx">location</span><span class="p">]:</span> <span class="p">{</span>
@@ -1200,12 +1181,43 @@ sort: {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre><h1 id='associations'>Associations</h1><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">associations</span> <span class="o">=</span> <span class="p">{</span>
+</code></pre><h1 id='associations'>Associations</h1>
+<p>It is possible to add assocaitions, in order to query multiple values from one query.</p>
+
+<p>For example, the postal code of Paris 16 can be either <code>75016</code> or <code>75116</code>.</p>
+
+<p>If a query contains <code>75016</code>, it will also search 75116 as postal code with a OR query.</p>
+
+<p>The config is as following:</p>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">associations</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">zip_code</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">[</span> <span class="s2">"75016"</span><span class="p">,</span> <span class="s2">"75116"</span> <span class="p">]</span>
     <span class="p">]</span>
 <span class="p">};</span>
-</code></pre><h1 id='synonyms'>Synonyms</h1><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">synonyms</span> <span class="o">=</span> <span class="p">{</span>
+</code></pre>
+<p>We can send a query like:</p>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="nl">zip_code</span><span class="p">:</span> <span class="s2">"75016"</span>
+<span class="p">}</span>
+</code></pre>
+<p>It will be the same as if we send a query like:</p>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="nl">zip_code</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"75016"</span><span class="p">,</span> <span class="s2">"75116"</span> <span class="p">]</span>
+<span class="p">}</span>
+</code></pre><h1 id='synonyms'>Synonyms</h1>
+<p>It is possible to add synonyms in order to replace some requested values.</p>
+
+<p>The structure is as following:</p>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">synonyms</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">FIELD_NAME</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">WORD</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">...</span><span class="nx">SYNONYMS</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>For example, we can add synonyms for estate types:</p>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">synonyms</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">type_bien</span><span class="p">:</span> <span class="p">{</span>
         <span class="na">Maison</span><span class="p">:</span> <span class="p">[</span>
             <span class="s2">"Maison"</span><span class="p">,</span>
@@ -1215,18 +1227,22 @@ sort: {
             <span class="s2">"Appartement"</span><span class="p">,</span>
             <span class="s2">"Loft"</span><span class="p">,</span>
             <span class="s2">"Marina"</span>
-        <span class="p">],</span>
-        <span class="na">Commerce</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">"Fond de commerce"</span><span class="p">,</span>
-            <span class="s2">"Local Commercial"</span><span class="p">,</span>
-            <span class="s2">"local commercial"</span>
-        <span class="p">],</span>
-        <span class="na">Bureau</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">"Bureaux"</span>
         <span class="p">]</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre><h1 id='settings'>Settings</h1><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+</code></pre>
+<p>We can send a query like:</p>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="nl">type_bien</span><span class="p">:</span> <span class="s2">"Maison"</span>
+<span class="p">}</span>
+</code></pre>
+<p>It will be the same as if we send a query like:</p>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="nl">type_bien</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"Maison"</span><span class="p">,</span> <span class="s2">"Villa"</span> <span class="p">]</span>
+<span class="p">}</span>
+</code></pre><h1 id='settings'>Settings</h1>
+<p>The <code>esSettings</code> function purpose is to retrieve the ES settings for indexes, as following:</p>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
     <span class="nl">settings</span><span class="p">:</span> <span class="p">{</span>
         <span class="nl">analysis</span><span class="p">:</span> <span class="p">{</span>
             <span class="nl">filter</span><span class="p">:</span> <span class="p">{</span>
@@ -1246,8 +1262,7 @@ sort: {
                 <span class="nx">french_stemmer</span><span class="p">:</span> <span class="p">{</span>
                     <span class="nl">type</span><span class="p">:</span> <span class="s2">"stemmer"</span><span class="p">,</span>
                     <span class="nx">language</span><span class="p">:</span> <span class="s2">"light_french"</span>
-                <span class="p">},</span>
-                <span class="p">...</span><span class="nx">s</span>
+                <span class="p">}</span>
             <span class="p">},</span>
             <span class="nx">tokenizer</span><span class="p">:</span> <span class="p">{</span>
                 <span class="nl">location_tokenizer</span><span class="p">:</span> <span class="p">{</span>
@@ -1258,7 +1273,13 @@ sort: {
             <span class="nx">analyzer</span><span class="p">:</span> <span class="p">{</span>
                 <span class="nl">french</span><span class="p">:</span> <span class="p">{</span>
                     <span class="nl">tokenizer</span><span class="p">:</span> <span class="s2">"icu_tokenizer"</span><span class="p">,</span>
-                    <span class="nx">filter</span><span class="p">:</span> <span class="p">[</span> <span class="p">...</span><span class="nx">filters</span> <span class="p">]</span>
+                    <span class="nx">filter</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="s2">"french_stop"</span><span class="p">,</span>
+                        <span class="s2">"french_elision"</span><span class="p">,</span>
+                        <span class="s2">"lowercase"</span><span class="p">,</span>
+                        <span class="s2">"icu_folding"</span><span class="p">,</span>
+                        <span class="s2">"french_stemmer"</span>
+                    <span class="p">];</span>
                 <span class="p">},</span>
                 <span class="nx">location_analyzer</span><span class="p">:</span> <span class="p">{</span>
                     <span class="nl">type</span><span class="p">:</span> <span class="s2">"custom"</span><span class="p">,</span>
@@ -1269,22 +1290,79 @@ sort: {
     <span class="p">},</span>
     <span class="nx">max_result_window</span><span class="p">:</span> <span class="mi">100000</span>
 <span class="p">}</span>
-</code></pre><h1 id='schema'>Schema</h1><h2 id='general-structure'>General structure</h2>
-<p><img src="images/api-archi-e1f4bebb.jpeg" alt="api-gateway" /></p>
+</code></pre>
+<p>It is used to initialiaze <code>filters</code>, <code>tokenizer</code> and <code>analyzer</code>.</p>
 
-<p><hr></p>
+<p>It can have some <code>synonyms</code> in parameter (from the Backoffice or from a specific file).</p>
+<h2 id='filters'>Filters</h2>
+<p>Filters are set as following:</p>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="nl">french_elision</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nl">type</span><span class="p">:</span> <span class="s2">"elision"</span><span class="p">,</span>
+        <span class="nx">articles_case</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">articles</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"l"</span><span class="p">,</span> <span class="s2">"m"</span><span class="p">,</span> <span class="s2">"t"</span><span class="p">,</span> <span class="s2">"qu"</span><span class="p">,</span> <span class="s2">"n"</span><span class="p">,</span> <span class="s2">"s"</span><span class="p">,</span>
+            <span class="s2">"j"</span><span class="p">,</span> <span class="s2">"d"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">,</span> <span class="s2">"jusqu"</span><span class="p">,</span> <span class="s2">"quoiqu"</span><span class="p">,</span>
+            <span class="s2">"lorsqu"</span><span class="p">,</span> <span class="s2">"puisqu"</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="nx">french_stop</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nl">type</span><span class="p">:</span> <span class="s2">"stop"</span><span class="p">,</span>
+        <span class="nx">stopwords</span><span class="p">:</span> <span class="s2">"_french_"</span>
+    <span class="p">},</span>
+    <span class="nx">french_stemmer</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nl">type</span><span class="p">:</span> <span class="s2">"stemmer"</span><span class="p">,</span>
+        <span class="nx">language</span><span class="p">:</span> <span class="s2">"light_french"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<ul>
+<li><code>french_elision</code> will be used to remove some words</li>
+<li><code>french_stop</code> will be used for french stop words = words that will not be taken into account</li>
+<li><code>french_stemmer</code> will be used for word stemming = get words root</li>
+</ul>
+
+<p>These filters will be used against all the <code>data that will be indexed into ES</code>, and against the <code>values passed in the query</code>.</p>
+<h2 id='analyzer'>Analyzer</h2>
+<p>The analyzers will help to process the indexed data and the requested values.</p>
+
+<p>It uses all the filters previously defined.</p>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="nl">french</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nl">tokenizer</span><span class="p">:</span> <span class="s2">"icu_tokenizer"</span><span class="p">,</span>
+        <span class="nx">filter</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"french_stop"</span><span class="p">,</span>
+            <span class="s2">"french_elision"</span><span class="p">,</span>
+            <span class="s2">"lowercase"</span><span class="p">,</span>
+            <span class="s2">"icu_folding"</span><span class="p">,</span>
+            <span class="s2">"french_stemmer"</span>
+        <span class="p">];</span>
+    <span class="p">},</span>
+    <span class="nx">location_analyzer</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nl">type</span><span class="p">:</span> <span class="s2">"custom"</span><span class="p">,</span>
+        <span class="nx">tokenizer</span><span class="p">:</span> <span class="s2">"location_tokenizer"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h2 id='synonyms-2'>Synonyms</h2>
+<p>Synonyms from the Backoffice can be passed from the parameters.</p>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="nl">synonym_filter</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nl">type</span><span class="p">:</span> <span class="s2">"synonym_graph"</span><span class="p">,</span>
+        <span class="nx">ignore_case</span><span class="p">:</span> <span class="s2">"true"</span><span class="p">,</span>
+        <span class="nx">lenient</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">synonyms</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>A synonym filter needs to be added and used in the config.</p>
+<h1 id='schema'>Schema</h1><h2 id='general-structure'>General structure</h2>
+<p><img src="images/api-archi-e1f4bebb.jpeg" alt="api-gateway" /></p>
 <h2 id='api-fw-architecture'>API FW architecture</h2>
 <p><img src="images/api-fw-archi-f9df0001.jpeg" alt="api-gateway" /></p>
-
-<p><hr></p>
 <h1 id='api-gateway'>API Gateway</h1><h2 id='api-gateway-architecture'>API Gateway architecture</h2>
 <p><img src="images/api-gateway-archi-a8a4b0a8.jpeg" alt="api-gateway" /></p>
-
-<p><hr></p>
 <h2 id='method-request'>Method Request</h2>
 <p>The <code>API Key REquired</code> must be set to <code>true</code></p>
-
-<p><hr></p>
 <h2 id='integration-request'>Integration Request</h2>
 <p>Choose the corect lambda function to call.</p>
 
@@ -1302,9 +1380,7 @@ sort: {
         </span><span class="err">#end</span><span class="w">
    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p><hr></p>
-<h2 id='method-responses'>Method Responses</h2>
+</span></code></pre><h2 id='method-responses'>Method Responses</h2>
 <p>Before setting up the <code>Integration Responses</code>, you need to configure the <code>Method Responses</code>.</p>
 
 <p>Configure the correct <code>HTTP Status</code>:</p>
@@ -1313,11 +1389,9 @@ sort: {
 <li>200</li>
 <li>500</li>
 </ul>
-
-<p><hr></p>
 <h2 id='integration-responses'>Integration Responses</h2>
 <ul>
-<li><p>Default</p>
+<li>Default
 
 <ul>
 <li>Lambda Error Regex: -</li>
@@ -1327,13 +1401,14 @@ sort: {
 
 <ul>
 <li>content type: application/json</li>
-<li>template:
-<code>json
-$input.path(&quot;$.body&quot;)
-</code></li>
+<li>template:</li>
 </ul></li>
 </ul></li>
-<li><p>Error</p>
+</ul>
+<pre class="highlight json tab-json"><code><span class="err">$input.path(</span><span class="s2">"$.body"</span><span class="err">)</span><span class="w">
+</span></code></pre>
+<ul>
+<li>Error
 
 <ul>
 <li>Lambda Error Regex: Error.*</li>
@@ -1343,14 +1418,12 @@ $input.path(&quot;$.body&quot;)
 
 <ul>
 <li>content type: application/json</li>
-<li>template:
-<code>json
-{ &quot;error&quot; : true, &quot;message&quot;: $input.json(&quot;$.errorMessage&quot;) }
-</code></li>
+<li>template:</li>
 </ul></li>
 </ul></li>
 </ul>
-
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w"> </span><span class="s2">"error"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="err">$input.json(</span><span class="s2">"$.errorMessage"</span><span class="err">)</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></code></pre>
       </div>
       <div class="dark-box">
           <div class="lang-selector">
