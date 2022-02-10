@@ -165,11 +165,11 @@ We can send a query like:
 }
 ```
 
-And get all the data where `status` is equal to `Available`.
+And get all the data where `price` is **lower than or equal** to the requested value.
 
-The `options` object will specify **exact match** for data result (needed with string queries).
+The default operator is `greater than or equal`, but for the `esParameter.price` field, it will be `lower than or equal`.
 
-As numeric field, we can send min / max objects:
+As numeric field, we can also send min / max objects:
 
 ```javascript
 {
