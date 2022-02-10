@@ -494,11 +494,11 @@
     <span class="nl">price</span><span class="p">:</span> <span class="mi">100000</span>
 <span class="p">}</span>
 </code></pre>
-<p>And get all the data where <code>status</code> is equal to <code>Available</code>.</p>
+<p>And get all the data where <code>price</code> is <strong>lower than or equal</strong> to the requested value.</p>
 
-<p>The <code>options</code> object will specify <strong>exact match</strong> for data result (needed with string queries).</p>
+<p>The default operator is <code>greater than or equal</code>, but for the <code>esParameter.price</code> field, it will be <code>lower than or equal</code>.</p>
 
-<p>As numeric field, we can send min / max objects:</p>
+<p>As numeric field, we can also send min / max objects:</p>
 <pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
     <span class="nl">price</span><span class="p">:</span> <span class="p">{</span>
         <span class="nl">min</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span>
