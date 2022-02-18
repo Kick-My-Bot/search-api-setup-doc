@@ -102,6 +102,15 @@ If `array` is selected, it will check if all the array items fit the other types
 Instead of using directly a name like `"location"`, please use `[esParameters.location]` as key for the config, in order to handle translations and renaming.
 
 
+# Keywords
+
+////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////
+
+
 # Terms structure
 
 The `terms` config is used for queries agains data fields.
@@ -1286,6 +1295,11 @@ The mapping templates should be as follow:
 {
 	"body": $input.json('$'),
 	"resource": "$context.resourcePath",
+	"path": {
+        #foreach($param in $input.params().path.keySet())
+            "$param": "$util.escapeJavaScript($input.params().path.get($param))" #if($foreach.hasNext),#end
+        #end
+   },
 	"queryStringParameters": {
         #foreach($param in $input.params().querystring.keySet())
             "$param": "$util.escapeJavaScript($input.params().querystring.get($param))" #if($foreach.hasNext),#end
