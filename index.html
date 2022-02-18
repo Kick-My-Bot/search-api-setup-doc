@@ -238,6 +238,9 @@
               </ul>
           </li>
           <li>
+            <a href="#keywords" class="toc-h1 toc-link" data-title="Keywords">Keywords</a>
+          </li>
+          <li>
             <a href="#terms-structure" class="toc-h1 toc-link" data-title="Terms structure">Terms structure</a>
           </li>
           <li>
@@ -449,6 +452,12 @@
 <p><code>terms</code> is used for match against data fields (for example here <code>status</code>, or <code>price</code>).</p>
 
 <p>Instead of using directly a name like <code>&quot;location&quot;</code>, please use <code>[esParameters.location]</code> as key for the config, in order to handle translations and renaming.</p>
+<h1 id='keywords'>Keywords</h1>
+<p>////////////////////////////////////////////////////////////////////</p>
+
+<p>////////////////////////////////////////////////////////////////////</p>
+
+<p>////////////////////////////////////////////////////////////////////</p>
 <h1 id='terms-structure'>Terms structure</h1>
 <p>The <code>terms</code> config is used for queries agains data fields.</p>
 
@@ -1373,6 +1382,11 @@ sort: {
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="err">$input.json('$')</span><span class="p">,</span><span class="w">
     </span><span class="s2">"resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$context.resourcePath"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"path"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">#foreach($param</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">$input.params().path.keySet())</span><span class="w">
+            </span><span class="s2">"$param"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$util.escapeJavaScript($input.params().path.get($param))"</span><span class="w"> </span><span class="err">#if($foreach.hasNext)</span><span class="p">,</span><span class="err">#end</span><span class="w">
+        </span><span class="err">#end</span><span class="w">
+   </span><span class="p">},</span><span class="w">
     </span><span class="s2">"queryStringParameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="err">#foreach($param</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">$input.params().querystring.keySet())</span><span class="w">
             </span><span class="s2">"$param"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$util.escapeJavaScript($input.params().querystring.get($param))"</span><span class="w"> </span><span class="err">#if($foreach.hasNext)</span><span class="p">,</span><span class="err">#end</span><span class="w">
